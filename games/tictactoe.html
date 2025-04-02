@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe | Dark Purple</title>
+    <style>
+        :root {
+            --primary: #8A2BE2;
+            --primary-dark: #7B1FA2;
+            --accent: #FF4D4D;
+            --background: #111111;
+            --panel: #1E1E1E;
+            --text: #e0e0e0;
+            --player-x: #eebbc3;
+            --player-o: #A855F7;
+        }
+
+        body {
+            background-color: var(--background);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        .game-container {
+            background-color: var(--panel);
+            border: 3px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
+            width: 340px;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .game-title {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .tictactoe-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+            margin: 0 auto 15px;
+        }
+
+        .tictactoe-cell {
+            width: 100px;
+            height: 100px;
+            background-color: var(--panel);
+            border: 2px solid #444;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .tictactoe-cell:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+        }
+
+        .tictactoe-cell.x {
+            color: var(--player-x);
+        }
+
+        .tictactoe-cell.o {
+            color: var(--player-o);
+        }
+
+        .game-status {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .game-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .game-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .close-game {
+            background: var(--accent);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-thinking {
+            color: var(--player-o);
+            font-style: italic;
+            text-align: center;
+            margin: 5px 0;
+            height: 20px;
+            visibility: hidden;
+        }
+
+        .winning-cell {
+            border-color: currentColor !important;
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        @media (max-width: 420px) {
+            .game-container {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .tictactoe-board {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                width: 100%;
+            }
+
+            .tictactoe-cell {
+                width: 100%;
+                height: 0;
+                padding-bottom: 100%;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h2 class="game-title">Tic-Tac-Toe</h2>
+            <button class="close-game" id="closeGame">×</button>
+        </div>
+        <div class="game-status" id="gameStatus">Du bist X, die KI ist O</div>
+        <div class="tictactoe-board" id="gameBoard">
+            <div class="tictactoe-cell" data-index="0"><span></span></div>
+            <div class="tictactoe-cell" data-index="1"><span></span></div>
+            <div class="tictactoe-cell" data-index="2"><span></span></div>
+            <div class="tictactoe-cell" data-index="3"><span></span></div>
+            <div class="tictactoe-cell" data-index="4"><span></span></div>
+            <div class="tictactoe-cell" data-index="5"><span></span></div>
+            <div class="tictactoe-cell" data-index="6"><span></span></div>
+            <div class="tictactoe-cell" data-index="7"><span></span></div>
+            <div class="tictactoe-cell" data-index="8"><span></span></div>
+        </div>
+        <div class="ai-thinking" id="aiThinking">Die KI denkt nach...</div>
+        <div class="game-controls">
+            <button class="game-btn" id="resetGame">Neustart</button>
+            <button class="game-btn" id="closeGameBtn">Schließen</button>
+        </div>
+    </div>
+
+    <script src="tictactoe.js"></script>
+</body>
+
+</html>

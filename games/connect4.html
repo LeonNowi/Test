@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vier Gewinnt | Dark Purple</title>
+    <style>
+        :root {
+            --primary: #8A2BE2;
+            --primary-dark: #7B1FA2;
+            --accent: #FF4D4D;
+            --background: #111111;
+            --panel: #1E1E1E;
+            --text: #e0e0e0;
+            --player1: #ff4d4d;
+            --player2: #f3f316;
+            --board-blue: #1a73e8;
+        }
+
+        body {
+            background-color: var(--background);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        .game-container {
+            background-color: var(--panel);
+            border: 3px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
+            max-width: 100%;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .game-title {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .connect4-board {
+            display: grid;
+            grid-template-columns: repeat(7, 50px);
+            grid-template-rows: repeat(6, 50px);
+            gap: 5px;
+            background-color: var(--board-blue);
+            padding: 10px;
+            border-radius: 10px;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .connect4-columns-container {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            width: calc(100% - 20px);
+            height: 100%;
+            display: flex;
+        }
+
+        .connect4-column {
+            flex: 1;
+            height: 100%;
+            cursor: pointer;
+            z-index: 10;
+            margin: 0 -2.5px;
+        }
+
+        .connect4-cell {
+            width: 50px;
+            height: 50px;
+            background-color: var(--background);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .connect4-cell::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border-radius: 50%;
+            background-color: var(--background);
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .connect4-cell[data-player="1"]::before {
+            background-color: var(--player1);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 77, 77, 0.5);
+        }
+
+        .connect4-cell[data-player="2"]::before {
+            background-color: var(--player2);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 0 10px rgba(243, 243, 22, 0.5);
+        }
+
+        .game-status {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .game-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .game-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .close-game {
+            background: var(--accent);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .column-full-message {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .connect4-chip {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 5;
+            transition: top 0.3s ease-in;
+        }
+
+        .connect4-chip[data-player="1"] {
+            background-color: var(--player1);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 77, 77, 0.5);
+        }
+
+        .connect4-chip[data-player="2"] {
+            background-color: var(--player2);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 0 10px rgba(243, 243, 22, 0.5);
+        }
+
+        .highlight {
+            animation: highlight 0.5s ease-in-out;
+        }
+
+        @keyframes highlight {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .connect4-board {
+                grid-template-columns: repeat(7, 8vw);
+                grid-template-rows: repeat(6, 8vw);
+                gap: 1vw;
+                padding: 2vw;
+            }
+
+            .connect4-cell {
+                width: 8vw;
+                height: 8vw;
+            }
+
+            .connect4-columns-container {
+                left: 2vw;
+                width: calc(100% - 4vw);
+            }
+
+            .connect4-chip {
+                width: 8vw !important;
+                height: 8vw !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h2 class="game-title">Vier Gewinnt</h2>
+            <button class="close-game" id="closeGame">×</button>
+        </div>
+        <div class="connect4-board" id="gameBoard">
+            <div class="connect4-columns-container" id="columnsContainer"></div>
+            <div class="column-full-message" id="columnFullMessage">Spalte voll!</div>
+        </div>
+        <div class="game-status" id="gameStatus">Spieler 1 ist am Zug</div>
+        <div class="game-controls">
+            <button class="game-btn" id="newGameBtn">Neues Spiel</button>
+            <button class="game-btn" id="closeGameBtn">Schließen</button>
+        </div>
+    </div>
+
+    <script src="connect4.js"></script>
+</body>
+
+</html>
