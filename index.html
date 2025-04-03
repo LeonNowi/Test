@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Games</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-deep">DEEP</span><span class="logo-seek">SEEK</span>
+                <span class="logo-games">GAMES</span>
+            </div>
+            <p>Klassische Spiele mit Lila-Akzenten</p>
+        </header>
+
+        <div class="content">
+            <div class="sidebar">
+                <div class="music-player card">
+                    <h3><i class="icon">🎵</i> Musik Player</h3>
+                    <audio id="audio-player" loop>
+                        <source src="sweden---minecraft-volume-alpha.mp3" type="audio/mpeg">
+                    </audio>
+                    <div class="volume-control">
+                        <label>Lautstärke: <span id="volume-value">1%</span></label>
+                        <input type="range" id="volume-slider" min="0" max="100" value="1">
+                    </div>
+                    <div class="player-buttons">
+                        <button id="play-btn" class="btn-icon">▶️ Abspielen</button>
+                        <button id="pause-btn" class="btn-icon">⏸️ Pause</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="game-selection card">
+                    <h2><i class="icon">🎮</i> Verfügbare Spiele</h2>
+                    <div class="game-buttons">
+                        <button id="tictactoe-btn" class="btn-game">⭕ TicTacToe</button>
+                        <button id="connect4-btn" class="btn-game">🔴 4 Gewinnt</button>
+                        <button id="snake-btn" class="btn-game">🐍 Snake</button>
+                    </div>
+                </div>
+
+                <div class="game-container card" id="game-container">
+                    <div class="game-placeholder">
+                        <p>Wähle ein Spiel aus der Leiste</p>
+                        <div class="grid-pattern"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

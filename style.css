@@ -1,0 +1,316 @@
+/* DeepSeek Dark Theme mit Lila-Akzenten */
+:root {
+    --bg-dark: #0a0a12;
+    --bg-card: #121220;
+    --bg-highlight: #1a1a2e;
+    --accent-purple: #8a2be2;
+    --accent-light: #b57edc;
+    --text-primary: #e6e6fa;
+    --text-secondary: #b8b8d8;
+}
+
+/* Allgemeine Styles */
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 20px;
+    min-width: 1000px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.logo-deep {
+    color: var(--accent-purple);
+}
+
+.logo-seek {
+    color: var(--text-primary);
+}
+
+.logo-games {
+    color: var(--accent-light);
+}
+
+header p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+/* Layout */
+.content {
+    display: flex;
+    gap: 25px;
+}
+
+.sidebar {
+    width: 280px;
+}
+
+.main-content {
+    flex: 1;
+}
+
+/* Karten */
+.card {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #2a2a3a;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Musik-Player */
+.music-player audio {
+    width: 100%;
+    margin: 15px 0;
+    filter: drop-shadow(0 0 5px rgba(138, 43, 226, 0.3));
+}
+
+.volume-control {
+    margin: 15px 0;
+}
+
+.volume-control input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, var(--accent-purple), #4b0082);
+    border-radius: 3px;
+    -webkit-appearance: none;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.player-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Buttons */
+button {
+    background: var(--accent-purple);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: #7b1fa2;
+    transform: translateY(-2px);
+}
+
+.btn-game {
+    background: linear-gradient(135deg, var(--accent-purple), #6a0dad);
+    min-width: 120px;
+    margin: 5px;
+}
+
+.btn-icon {
+    background-color: #2a2a3a;
+    border: 1px solid var(--accent-purple);
+    flex: 1;
+}
+
+/* ===== TIC TAC TOE ===== */
+.tictactoe-game {
+    text-align: center;
+}
+
+.game-mode {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.game-mode button.active {
+    background: var(--accent-purple);
+}
+
+.tictactoe-game .snake-scores {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+.tictactoe-game .snake-score,
+.tictactoe-game .snake-highscore {
+    color: var(--accent-light);
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+#ttt-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    margin: 20px auto;
+    background-color: var(--bg-highlight);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid var(--accent-purple);
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: var(--bg-card);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+
+.cell:hover {
+    background-color: #1e1e3a;
+    transform: scale(1.03);
+}
+
+.x {
+    color: var(--accent-purple);
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
+}
+
+.o {
+    color: #4ac7c7;
+    text-shadow: 0 0 10px rgba(74, 199, 199, 0.7);
+}
+
+#reset-ttt {
+    margin-top: 15px;
+    background: var(--bg-highlight);
+    border: 1px solid var(--accent-purple);
+}
+
+#reset-ttt:hover {
+    background: var(--accent-purple);
+}
+
+/* ===== SNAKE SPIEL ===== */
+.snake-game {
+    text-align: center;
+}
+
+#snake-canvas {
+    background-color: var(--bg-highlight);
+    border: 2px solid var(--accent-purple);
+    border-radius: 8px;
+    margin: 20px auto;
+    display: block;
+}
+
+.snake-scores {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.snake-score {
+    color: var(--accent-light);
+}
+
+.snake-highscore {
+    color: var(--accent-purple);
+    font-weight: bold;
+}
+
+.snake-controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Popups */
+.game-over-popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.popup-content {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid var(--accent-purple);
+    max-width: 300px;
+    width: 100%;
+}
+
+.popup-content h3 {
+    color: var(--accent-purple);
+    margin-top: 0;
+}
+
+.popup-content p {
+    margin: 10px 0;
+}
+
+.popup-content button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+/* Platzhalter */
+.game-placeholder {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+}
+
+.grid-pattern {
+    width: 200px;
+    height: 200px;
+    margin: 30px auto;
+    background: 
+        linear-gradient(var(--bg-highlight) 2px, transparent 2px),
+        linear-gradient(90deg, var(--bg-highlight) 2px, transparent 2px);
+    background-size: 20px 20px;
+    opacity: 0.3;
+    border-radius: 10px;
+}
